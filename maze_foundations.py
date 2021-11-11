@@ -35,7 +35,7 @@ class Node:
         for state in possible_states:
             node = Node(state, self)
             nodes.append(node)
-
+            
         return nodes
 
     def get_possible_states(self):

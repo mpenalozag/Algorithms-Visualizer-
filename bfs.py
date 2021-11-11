@@ -1,8 +1,10 @@
+from typing import NewType
 from maze_foundations import Node
 from collections import deque
 import time
 import os
 from colorama import Fore, Style, Back
+from copy import deepcopy
 
 from mazes import print_maze
 
@@ -26,7 +28,7 @@ class BFS:
         frontier.append(node)
         # Creamos lista reached, con todos los estados que ya alcanzamos.
         reached = []
-        reached.append(node.state.map)
+        reached.append(node.state)
         
         # Mientras existan elementos en la frontera.
         while len(frontier) > 0:
@@ -37,17 +39,28 @@ class BFS:
             print("B R E A D T H   F I R S T   S E A R C H   W O R K I N G")
             print(Style.RESET_ALL)
             print_maze(node.state.map, node.state.cols_size)
-            time.sleep(0.2)
+            time.sleep(0.5)
             # Recorremos los hijos del nodo.
-            for child in node.expand():
+            childs = node.expand()
+            for child in childs:
                 if child.state.map == self.problem.goal_state.map:
                     os.system("clear")
                     print_maze(child.state.map, node.state.cols_size)
                     self.get_solution_path(child)
                     return child
-                if child.state.map not in reached:
-                    reached.append(child.state.map)
+                if not self.is_state_on_reached(child.state, reached):
+                    reached.append(child.state)
                     frontier.append(child)
+            #if len(node.expand()) == 1 and node.state.map != self.problem.initial_state.map and node.state.map != self.normalize_map(self.problem.goal_state):
+            #    coloured_map = self.color_closed_path(node)
+            #    for node in frontier:
+            #        agent_coords = node.state.agent_coordinates
+            #        node.state.map = deepcopy(coloured_map)
+            #        node.state.map[agent_coords[0]][agent_coords[1]] = "🟩"
+            #    for state in reached:
+            #        agent_coords = state.agent_coordinates
+            #        state.map = deepcopy(coloured_map)
+            #        state.map[agent_coords[0]][agent_coords[1]] = "🟩"
         # Retornamos fallo en la búsqueda de una solución.
         print("This maze has no solution!")
         return False
@@ -74,8 +87,31 @@ class BFS:
     def color_closed_path(self, child):
         current_node = child
         while current_node.parent != None:
-            agent_coords = child.state.agent_coordinates
-            child.state.map[agent_coords[0]][agent_coords[1]] = child.used_path
-            print_maze(child.state.map, child.state.cols_size)
-            time.sleep(1)
+            green_path = current_node.state.get_green_path()
             current_node = current_node.parent
+            for green_coord in green_path:
+                current_node.state.map[green_coord[0]][green_coord[1]] = "🟩"
+            previous_node = current_node
+
+        green_path = current_node.state.get_green_path()
+        for green_coord in green_path:
+            current_node.state.map[green_coord[0]][green_coord[1]] = "🟥"
+        
+        
+        coloured_map = deepcopy(current_node.state.map)
+        #print_maze(coloured_map, current_node.state.cols_size)
+        return coloured_map
+
+    def is_state_on_reached(self, test_state, reached):
+        for state in reached:
+            if state.map == test_state.map:
+                return True
+        return False
+
+    def normalize_map(self, state):
+        map_copy = deepcopy(state.map)
+        for x in range(state.rows_size):
+            for y in range(state.cols_size):
+                if state.map[x][y] == "🟥":
+                    map_copy[x][y] = "  "
+        return map_copy
