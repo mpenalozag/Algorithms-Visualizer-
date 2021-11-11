@@ -35,7 +35,7 @@ class Node:
         for state in possible_states:
             node = Node(state, self)
             nodes.append(node)
-            
+
         return nodes
 
     def get_possible_states(self):
@@ -77,7 +77,7 @@ class Node:
         return possible_moves
 
     def move_is_valid(self, move, direction):
-        if self.state.map[move[0]][move[1]] != "||" and self.state.map:
+        if self.state.map[move[0]][move[1]] != "||":
             return True
         return False
         

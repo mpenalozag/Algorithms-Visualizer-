@@ -39,7 +39,7 @@ class BFS:
             print("B R E A D T H   F I R S T   S E A R C H   W O R K I N G")
             print(Style.RESET_ALL)
             print_maze(node.state.map, node.state.cols_size)
-            time.sleep(0.5)
+            time.sleep(0.25)
             # Recorremos los hijos del nodo.
             childs = node.expand()
             for child in childs:
