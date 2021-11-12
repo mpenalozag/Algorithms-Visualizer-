@@ -1,4 +1,6 @@
-Needed modules:
+# Algorithm Visualizer
+
+###### Needed modules:
     - os
     - time
     - colorama
