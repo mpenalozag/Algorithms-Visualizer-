@@ -17,7 +17,7 @@ class Algorithm:
         while current_node.parent != None:
             self.colored_print(Fore.LIGHTCYAN_EX, "C A M I N O   E N   R E V E R S A")
             print_maze(current_node.state.map, current_node.state.cols_size)
-            time.sleep(0.1)
+            time.sleep(0.15)
             green_path = current_node.state.get_green_path()
             current_node = current_node.parent
             for green_coord in green_path:
