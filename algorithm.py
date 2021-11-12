@@ -6,6 +6,11 @@ import os
 
 
 class Algorithm:
+
+    agent_color = "🟩"
+    reached_color = "🟦"
+    expanded_color = "🟨"
+    used_path = "🟥"
     
     def get_solution_path(self, node):
         current_node = node
@@ -37,7 +42,7 @@ class Algorithm:
         os.system("clear")
         print_maze(mapa, cols)
 
-    def print_checked_map(self, state, reached):
+    def print_checked_map(self, state, reached, frontier):
         # Primero hacemos una copia del mapa para no modificar el original.
         copied_map = deepcopy(state.map)
         # Creamos lista para guardar las coordenadas del agente del mapa que entra.
@@ -45,6 +50,10 @@ class Algorithm:
         # Recorremos todos los estados ya alcanzados.
         for state in reached:
             agent_coords = state.agent_coordinates
+            copied_map[agent_coords[0]][agent_coords[1]] = self.expanded_color
+        # Recorremos todos los nodos de la frontera.
+        for node in frontier:
+            agent_coords = node.state.agent_coordinates
             copied_map[agent_coords[0]][agent_coords[1]] = self.reached_color
         # Volvemos a colocar de color verde la posicion del agente en el estado que entró como input.
         copied_map[green_coords[0]][green_coords[1]] = self.agent_color

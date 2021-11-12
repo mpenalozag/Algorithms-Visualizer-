@@ -39,7 +39,7 @@ class BFS(Algorithm):
             # Tomamos el nodo de mas antiguedad en la frontera (lógica FIFO)
             node = frontier.popleft()
             self.colored_print(Fore.LIGHTYELLOW_EX, "B R E A D T H   F I R S T   S E A R C H   W O R K I N G")
-            self.print_checked_map(node.state, reached)
+            self.print_checked_map(node.state, reached, frontier)
             time.sleep(0.5)
             # Recorremos los hijos del nodo.
             childs = node.expand()
