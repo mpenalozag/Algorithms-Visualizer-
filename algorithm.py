@@ -41,11 +41,12 @@ class Algorithm:
         # Primero hacemos una copia del mapa para no modificar el original.
         copied_map = deepcopy(state.map)
         # Creamos lista para guardar las coordenadas del agente del mapa que entra.
-        green_coords = state.get_green_path()
+        green_coords = state.agent_coordinates
         # Recorremos todos los estados ya alcanzados.
         for state in reached:
             agent_coords = state.agent_coordinates
             copied_map[agent_coords[0]][agent_coords[1]] = self.reached_color
-        for coord in green_coords:
-            copied_map[coord[0]][coord[1]] = self.agent_color
+        # Volvemos a colocar de color verde la posicion del agente en el estado que entró como input.
+        copied_map[green_coords[0]][green_coords[1]] = self.agent_color
+        # Printeamos el laberinto.
         print_maze(copied_map, state.cols_size)
