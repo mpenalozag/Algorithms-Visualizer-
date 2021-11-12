@@ -17,7 +17,7 @@ class BFS:
         Retorna el nodo objetivo o retorna que no hay solución.
         """
         # Creamos el nodo inicial, que contiene el estado inicial del problema.
-        node = Node(self.problem.initial_state, None)
+        node = Node(deepcopy(self.problem.initial_state), None)
         # Si el nodo inicial es la solución, retornamos el nodo.
         if self.problem.goal_state.map == node.state.map:
             return node
@@ -35,13 +35,12 @@ class BFS:
             node = frontier.popleft()
             self.colored_print(Fore.LIGHTYELLOW_EX, "B R E A D T H   F I R S T   S E A R C H   W O R K I N G")
             print_maze(node.state.map, node.state.cols_size)
-            time.sleep(0.4)
+            time.sleep(0.1)
             # Recorremos los hijos del nodo.
             childs = node.expand()
             for child in childs:
                 if child.state.map == self.problem.goal_state.map:
-                    os.system("clear")
-                    print_maze(child.state.map, node.state.cols_size)
+                    self.print_maze_map(child.state.map, node.state.cols_size)
                     self.get_solution_path(child)
                     return child
                 if not self.is_state_on_reached(child.state, reached):
@@ -72,7 +71,11 @@ class BFS:
         return False
 
     def colored_print(self, color, text):
-        os.system("clear")
+        #os.system("clear")
         print(color)
         print(text)
         print(Style.RESET_ALL)
+
+    def print_maze_map(self, mapa, cols):
+        os.system("clear")
+        print_maze(mapa, cols)
