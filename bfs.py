@@ -1,4 +1,3 @@
-from typing import NewType
 from maze_foundations import Node
 from collections import deque
 import time
@@ -34,10 +33,7 @@ class BFS:
         while len(frontier) > 0:
             # Tomamos el nodo de mas antiguedad en la frontera (lógica FIFO)
             node = frontier.popleft()
-            os.system("clear")
-            print(Fore.LIGHTYELLOW_EX)
-            print("B R E A D T H   F I R S T   S E A R C H   W O R K I N G")
-            print(Style.RESET_ALL)
+            self.colored_print(Fore.LIGHTYELLOW_EX, "B R E A D T H   F I R S T   S E A R C H   W O R K I N G")
             print_maze(node.state.map, node.state.cols_size)
             time.sleep(0.4)
             # Recorremos los hijos del nodo.
