@@ -8,6 +8,12 @@ from copy import deepcopy
 from mazes import print_maze
 
 class BFS:
+
+    agent_color = "🟩"
+    reached_color = "🟦"
+    expanded_color = "🟨"
+    used_path = "🟥"
+
     def __init__(self, problem):
         self.problem = problem
         self.answer = self.apply_algorithm()
@@ -34,8 +40,9 @@ class BFS:
             # Tomamos el nodo de mas antiguedad en la frontera (lógica FIFO)
             node = frontier.popleft()
             self.colored_print(Fore.LIGHTYELLOW_EX, "B R E A D T H   F I R S T   S E A R C H   W O R K I N G")
-            print_maze(node.state.map, node.state.cols_size)
-            time.sleep(0.4)
+            self.print_checked_map(node.state, reached)
+            #print_maze(node.state.map, node.state.cols_size)
+            time.sleep(0.3)
             # Recorremos los hijos del nodo.
             childs = node.expand()
             for child in childs:
@@ -79,3 +86,16 @@ class BFS:
     def print_maze_map(self, mapa, cols):
         os.system("clear")
         print_maze(mapa, cols)
+
+    def print_checked_map(self, state, reached):
+        # Primero hacemos una copia del mapa para no modificar el original.
+        copied_map = deepcopy(state.map)
+        # Creamos lista para guardar las coordenadas del agente del mapa que entra.
+        green_coords = state.get_green_path()
+        # Recorremos todos los estados ya alcanzados.
+        for state in reached:
+            agent_coords = state.agent_coordinates
+            copied_map[agent_coords[0]][agent_coords[1]] = self.reached_color
+        for coord in green_coords:
+            copied_map[coord[0]][coord[1]] = self.agent_color
+        print_maze(copied_map, state.cols_size)
