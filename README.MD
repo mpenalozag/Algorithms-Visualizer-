@@ -6,4 +6,4 @@
     - colorama
     - copy
 
-To run the program execute 'main.py'
+To run the program execute '''main.py'''
