@@ -7,12 +7,6 @@ from copy import deepcopy
 from algorithm import Algorithm
 
 class BFS(Algorithm):
-
-    agent_color = "🟩"
-    reached_color = "🟦"
-    expanded_color = "🟨"
-    used_path = "🟥"
-
     def __init__(self, problem):
         self.problem = problem
         self.answer = self.apply_algorithm()

@@ -11,12 +11,6 @@ from copy import deepcopy
 
 
 class DFS(Algorithm):
-
-    agent_color = "🟩"
-    reached_color = "🟦"
-    expanded_color = "🟨"
-    used_path = "🟥"
-
     def __init__(self, problem):
         self.problem = problem
         self.answer = self.apply_algorithm()
