@@ -35,7 +35,7 @@ class BFS:
             node = frontier.popleft()
             self.colored_print(Fore.LIGHTYELLOW_EX, "B R E A D T H   F I R S T   S E A R C H   W O R K I N G")
             print_maze(node.state.map, node.state.cols_size)
-            time.sleep(0.1)
+            time.sleep(0.4)
             # Recorremos los hijos del nodo.
             childs = node.expand()
             for child in childs:
@@ -71,7 +71,7 @@ class BFS:
         return False
 
     def colored_print(self, color, text):
-        #os.system("clear")
+        os.system("clear")
         print(color)
         print(text)
         print(Style.RESET_ALL)

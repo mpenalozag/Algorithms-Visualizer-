@@ -59,7 +59,7 @@ class DFS:
         return False
 
     def colored_print(self, color, text):
-        #os.system("clear")
+        os.system("clear")
         print(color)
         print(text)
         print(Style.RESET_ALL)
