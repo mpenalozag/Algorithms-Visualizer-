@@ -33,13 +33,15 @@ class Algorithm:
         return False
 
     def colored_print(self, color, text):
-        os.system("clear")
+        os.system('cls' if os.name == 'nt' else 'clear')
+        #os.system("clear")
         print(color)
         print(text)
         print(Style.RESET_ALL)
 
     def print_maze_map(self, mapa, cols):
-        os.system("clear")
+        os.system('cls' if os.name == 'nt' else 'clear')
+        #os.system("clear")
         print_maze(mapa, cols)
 
     def print_checked_map(self, state, reached, frontier):
