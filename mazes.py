@@ -96,3 +96,9 @@ hard_maze["goal"] = [
     ["  ", "||", "||", "||", "  ", "||", "  ", "||", "  ", "  ", ],
     ["  ", "  ", "  ", "||", "  ", "  ", "  ", "||", "||", "  ", ],
 ]
+
+
+all_mazes = dict()
+all_mazes["easy"] = easy_maze
+all_mazes["medium"] = medium_maze
+all_mazes["hard"] = hard_maze

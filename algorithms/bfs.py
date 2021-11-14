@@ -1,4 +1,4 @@
-from maze_foundations import Node
+from foundations import Node
 from collections import deque
 import time
 import os
