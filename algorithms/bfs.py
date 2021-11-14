@@ -4,7 +4,7 @@ import time
 import os
 from colorama import Fore, Style, Back
 from copy import deepcopy
-from algorithm import Algorithm
+from algorithms.algorithm import Algorithm
 
 class BFS(Algorithm):
     def __init__(self, problem):

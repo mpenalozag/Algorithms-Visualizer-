@@ -2,7 +2,7 @@ from collections import deque
 from maze_foundations import Node
 from colorama import Fore, Back, Style
 from mazes import print_maze
-from algorithm import Algorithm
+from algorithms.algorithm import Algorithm
 
 
 import time

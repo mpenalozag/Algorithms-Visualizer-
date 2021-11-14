@@ -1,7 +1,7 @@
 import mazes
 from maze_foundations import Problem, State, Node
-import bfs
-import dfs
+from algorithms import bfs
+from algorithms import dfs
 from threading import Thread, Lock
 
 
