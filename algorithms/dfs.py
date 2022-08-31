@@ -29,7 +29,7 @@ class DFS(Algorithm):
             node = frontier.popleft()
             self.colored_print(Fore.LIGHTYELLOW_EX, "D E P T H   F I R S T   S E A R C H   W O R K I N G")
             self.print_checked_map(node.state, reached, frontier)
-            time.sleep(0.3)
+            time.sleep(0.2)
             # Si es que el nodo actual es la solución, retornamos el nodo.
             if self.problem.goal_state.map == node.state.map:
                 self.get_solution_path(node)
